@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<title>ConferenceInstitution index</title>
+
+{% block body %}
+    <h1>ConferenceInstitution index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Logo</th>
+                <th>Domain</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for conference_institution in conference_institutions %}
+            <tr>
+                <td>{{ conference_institution.id }}</td>
+                <td>{{ conference_institution.title }}</td>
+                <td>{{ conference_institution.logo }}</td>
+                <td>{{ conference_institution.domain }}</td>
+                <td>
+                    <a href="{{ path('conference_institution_show', {'id': conference_institution.id}) }}">show</a>
+                    <a href="{{ path('conference_institution_edit', {'id': conference_institution.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('conference_institution_new') }}">Create new</a>
+{% endblock %}

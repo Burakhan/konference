@@ -1,0 +1,15 @@
+<div class="subheader mb-2">Kişisel</div>
+<div class="list-group list-group-transparent mb-3">
+    <a class="list-group-item list-group-item-action d-flex align-items-center {{ app.request.get('_route') == '_list' ? 'active' }}" href="#">
+        Başvurularım
+        <small class="text-muted ml-auto">24</small>
+    </a>
+
+</div>
+<div class="subheader mb-2">Admin</div>
+<div class="list-group list-group-transparent mb-3">
+    <a class="list-group-item list-group-item-action d-flex align-items-center {{ app.request.get('_route') == 'conference_index' ? 'active' }}" href="{{ path('conference_index') }}">
+        Konferanslarım
+        <small class="text-muted ml-auto">24</small>
+    </a>
+</div>
