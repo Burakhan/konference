@@ -1,0 +1,15 @@
+your_profile: Your Profile
+edit_profile: Edit Profile
+sign_in: Sign In
+form:
+  username: Username
+  password: Password
+  repeat_password: Repeat Password
+  register: Register
+  email: Email
+  fullname: Full Name
+  please_enter: Please enter a {field}
+  least_characters: Your {field} should be at least {{ limit }} characters
+have_account: Do you have an account?
+new_membership: Register a new membership
+forgot_password: I forgot my password

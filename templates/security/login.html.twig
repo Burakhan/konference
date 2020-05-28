@@ -1,0 +1,60 @@
+{% extends 'public.base.html.twig' %}
+{% block title %}{{ 'form.register'|trans }}!{% endblock %}
+
+{% block body %}
+
+    <div class="container-xl">
+        <div class="row">
+            <div class="col-lg-6">
+                <form class="form-vertical card card-md" method="post">
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+
+                    <div class="card-body">
+
+                        <h2 class="mb-5 text-center">{{ 'sign_in'|trans }}</h2>
+                        {% if error %}
+                            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                        {% endif %}
+                        <div class="mb-3">
+                            <label class="form-label">E-Posta</label>
+                            <input class="form-control" value="{{ last_username }}" name="email" type="text" id="inputEmail" placeholder="{{ 'form.username'|trans }}" required autofocus>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Şifre</label>
+                            <input class="form-control" type="password" name="password" id="inputPassword" required id="inputPassword" placeholder="{{ 'form.password'|trans }}">
+                        </div>
+                        <div class="form-footer">
+                            <button class="btn btn-success btn-block " type="submit">
+                                {{ 'sign_in'|trans }}
+                            </button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="col-lg-6">
+                <div class="card card-md">
+                    <div class="card-body">
+                        <h2 class="mb-5 text-center">Neden kayıt olmalıyım?</h2>
+                        <ul>
+                            <li>Kişisel ve kurumsal gelişim adına güncel konularda çeşitli eğitim, çalıştay ve paneller takip edebilmek için,</li>
+                            <li>İlgi alanlarınıza ait etkinliklerden haberdar olmak için,</li>
+                            <li>Konferanslara başvuru yapabilmek için,</li>
+                            <li>Yeni bir konferans oluşturabilmek için,</li>
+                            <li>Bir konferasa katılmak için,</li>
+                        </ul>
+
+                        <div class="hr-text">Üye degilim</div>
+                        <p>
+                            <a href="{{ path('app_register') }}" class="btn btn-outline-danger btn-block ml-3">
+                                Üye ol
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

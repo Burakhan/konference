@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+
+<title>Edit ConferenceInstitution</title>
+
+{% block body %}
+    <h1>Edit ConferenceInstitution</h1>
+
+    {{ include('conference_institution/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('conference_institution_index') }}">back to list</a>
+
+    {{ include('conference_institution/_delete_form.html.twig') }}
+{% endblock %}

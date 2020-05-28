@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>Konference {% block title %}{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <meta name="msapplication-TileColor" content="#206bc4"/>
+    <meta name="theme-color" content="#206bc4"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="mobile-web-app-capable" content="yes"/>
+    <meta name="HandheldFriendly" content="True"/>
+    <meta name="MobileOptimized" content="320"/>
+    <meta name="robots" content="noindex,nofollow,noarchive"/>
+    <link rel="icon" href="./favicon.ico" type="image/x-icon"/>
+    <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon"/>
+    <!-- Libs CSS -->
+    <link href="{{ asset('assets/libs/jqvmap/dist/jqvmap.min.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('assets/libs/selectize/dist/css/selectize.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('assets/libs/fullcalendar/core/main.min.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('assets/libs/fullcalendar/daygrid/main.min.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('assets/libs/fullcalendar/timegrid/main.min.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('assets/libs/fullcalendar/list/main.min.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('assets/libs/flatpickr/dist/flatpickr.min.css') }}" rel="stylesheet"/>
+    <link href=".{{ asset('assets/libs/nouislider/distribute/nouislider.min.css') }}" rel="stylesheet"/>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v1.8.0/mapbox-gl.css') }}" rel="stylesheet"/>
+    <!-- Tabler Core -->
+    <link href="{{ asset('assets/css/tabler.min.css') }}" rel="stylesheet"/>
+    <!-- Tabler Plugins -->
+    <link href="{{ asset('assets/css/tabler-flags.min.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('assets/css/tabler-payments.min.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('assets/css/tabler-buttons.min.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('assets/css/demo.min.css') }}" rel="stylesheet"/>
+    <style>
+        body {
+            display: none;
+        }
+    </style>
+</head>
+<body class="antialiased">
+<div class="page">
+   {{ include('_common/header.html.twig') }}
+   {{ include('_common/navbar.html.twig') }}
+    <div class="content">
+        {% block body %}
+        {% endblock body %}
+        {{ include('_common/footer.html.twig') }}
+    </div>
+</div>
+<script src="{{ asset('assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ asset('assets/libs/jquery/dist/jquery.slim.min.js') }}"></script>
+<script src="{{ asset('assets/libs/autosize/dist/autosize.min.js') }}"></script>
+<script src="{{ asset('assets/libs/imask/dist/imask.min.js') }}"></script>
+<script src="{{ asset('assets/libs/selectize/dist/js/standalone/selectize.min.js') }}"></script>
+<script src="{{ asset('assets/libs/flatpickr/dist/flatpickr.min.js') }}"></script>
+<script src="{{ asset('assets/libs/flatpickr/dist/plugins/rangePlugin.js') }}"></script>
+<script src="{{ asset('assets/libs/nouislider/distribute/nouislider.min.js') }}"></script>
+<script src="{{ asset('assets/libs/apexcharts/dist/apexcharts.min.js') }}"></script>
+<script src="{{ asset('assets/libs/jqvmap/dist/jquery.vmap.min.js') }}"></script>
+<script src="{{ asset('assets/libs/jqvmap/dist/maps/jquery.vmap.world.js') }}"></script>
+<script src="{{ asset('assets/libs/jqvmap/dist/maps/jquery.vmap.usa.js') }}"></script>
+<script src="{{ asset('assets/libs/jqvmap/dist/maps/continents/jquery.vmap.europe.js') }}"></script>
+<script src="{{ asset('assets/libs/peity/jquery.peity.min.js') }}"></script>
+<!-- Tabler Core -->
+<script src="{{ asset('assets/js/tabler.min.js') }}"></script>
+<script>
+    document.body.style.display = "block"
+</script>
+{% block javascripts %}{% endblock %}
+</body>

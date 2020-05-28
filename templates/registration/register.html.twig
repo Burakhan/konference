@@ -1,0 +1,64 @@
+{% extends 'public.base.html.twig' %}
+{% block title %}{{ 'form.register'|trans }}!{% endblock %}
+
+{% block body %}
+
+    <div class="container-xl">
+        <div class="row">
+            <div class="col-lg-6">
+                {{ form_start(registrationForm,  {'attr': {'class': 'card card-md'}}) }}
+                <div class="card-body">
+                    <h2 class="mb-5 text-center">Kayıt olunuz</h2>
+                    <div class="mb-3">
+                        {{ form_label(registrationForm.fullName) }}
+                        {{ form_widget(registrationForm.fullName, {'attr': {'class': 'span12', 'placeholder': 'form.fullname'|trans}}) }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form_label(registrationForm.email) }}
+                        {{ form_widget(registrationForm.email, {'attr': {'class': 'span12', 'placeholder': 'form.email'|trans}}) }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form_label(registrationForm.password.first) }}
+                        {{ form_widget(registrationForm.password.first, {'attr': {'class': 'span12', 'placeholder': 'form.password'|trans}}) }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form_label(registrationForm.password.second) }}
+                        {{ form_widget(registrationForm.password.second, {'attr': {'class': 'span12', 'placeholder': 'form.repeat_password'|trans}}) }}
+                    </div>
+
+                    <div class="mb-2">
+                        {{ form_widget(registrationForm.agreeTerms) }}
+                        {{ form_label(registrationForm.agreeTerms) }}
+                    </div>
+                    <div class="form-footer">
+                        <button type="submit" class="btn btn-success btn-block">{{ 'form.register'|trans }}</button>
+                    </div>
+                </div>
+
+                {{ form_end(registrationForm) }}
+            </div>
+            <div class="col-lg-6">
+                <div class="card card-md">
+                    <div class="card-body">
+                        <h2 class="mb-5 text-center">Neden kayıt olmalıyım?</h2>
+                        <ul>
+                            <li>Kişisel ve kurumsal gelişim adına güncel konularda çeşitli eğitim, çalıştay ve paneller takip edebilmek için,</li>
+                            <li>İlgi alanlarınıza ait etkinliklerden haberdar olmak için,</li>
+                            <li>Konferanslara başvuru yapabilmek için,</li>
+                            <li>Yeni bir konferans oluşturabilmek için,</li>
+                            <li>Bir konferasa katılmak için,</li>
+                        </ul>
+
+                        <div class="hr-text">Zaten üyeyim</div>
+                        <p>
+                            <a href="{{ path('app_login') }}" class="btn btn-outline-danger btn-block ml-3">
+                                Giriş Yap
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

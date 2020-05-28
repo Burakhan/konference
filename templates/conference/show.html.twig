@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<title>Conference</title>
+
+{% block body %}
+    <h1>Conference</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ conference.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ conference.title }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ conference.description }}</td>
+            </tr>
+            <tr>
+                <th>Conference_type</th>
+                <td>{{ conference.conferenceType ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Start_date</th>
+                <td>{{ conference.startDate ? conference.startDate|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>End_date</th>
+                <td>{{ conference.endDate ? conference.endDate|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('conference_index') }}">back to list</a>
+
+    <a href="{{ path('conference_edit', {'id': conference.id}) }}">edit</a>
+
+    {{ include('conference/_delete_form.html.twig') }}
+{% endblock %}
