@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ConferenceRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -28,24 +30,40 @@ class Conference
     private $description;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="string", length=25)
      */
-    private $conference_type;
+    private $conferenceType;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $start_date;
+    private $startDate;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $end_date;
+    private $endDate;
 
     /**
      * @ORM\ManyToOne(targetEntity=ConferenceInstitution::class, inversedBy="conferences")
      */
     private $institution;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class)
+     * @ORM\JoinColumn(name="owner", referencedColumnName="id")
+     */
+    private $owner;
+
+    /**
+     * @ORM\OneToMany(targetEntity=ConferenceApplication::class, mappedBy="conference")
+     */
+    private $conferenceApplications;
+
+    public function __construct()
+    {
+        $this->conferenceApplications = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -76,38 +94,38 @@ class Conference
         return $this;
     }
 
-    public function getConferenceType(): ?bool
+    public function getConferenceType(): ?string
     {
-        return $this->conference_type;
+        return $this->conferenceType;
     }
 
-    public function setConferenceType(bool $conference_type): self
+    public function setConferenceType(string $conferenceType): self
     {
-        $this->conference_type = $conference_type;
+        $this->conferenceType = $conferenceType;
 
         return $this;
     }
 
     public function getStartDate(): ?\DateTimeInterface
     {
-        return $this->start_date;
+        return $this->startDate;
     }
 
-    public function setStartDate(\DateTimeInterface $start_date): self
+    public function setStartDate(\DateTimeInterface $startDate): self
     {
-        $this->start_date = $start_date;
+        $this->startDate = $startDate;
 
         return $this;
     }
 
     public function getEndDate(): ?\DateTimeInterface
     {
-        return $this->end_date;
+        return $this->endDate;
     }
 
-    public function setEndDate(\DateTimeInterface $end_date): self
+    public function setEndDate(\DateTimeInterface $endDate): self
     {
-        $this->end_date = $end_date;
+        $this->endDate = $endDate;
 
         return $this;
     }
@@ -120,6 +138,53 @@ class Conference
     public function setInstitution(?ConferenceInstitution $institution): self
     {
         $this->institution = $institution;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getOwner()
+    {
+        return $this->owner;
+    }
+
+    /**
+     * @param mixed $owner
+     */
+    public function setOwner($owner): void
+    {
+        $this->owner = $owner;
+    }
+
+    /**
+     * @return Collection|ConferenceApplication[]
+     */
+    public function getConferenceApplications(): Collection
+    {
+        return $this->conferenceApplications;
+    }
+
+    public function addConferenceApplication(ConferenceApplication $conferenceApplication): self
+    {
+        if (!$this->conferenceApplications->contains($conferenceApplication)) {
+            $this->conferenceApplications[] = $conferenceApplication;
+            $conferenceApplication->setConference($this);
+        }
+
+        return $this;
+    }
+
+    public function removeConferenceApplication(ConferenceApplication $conferenceApplication): self
+    {
+        if ($this->conferenceApplications->contains($conferenceApplication)) {
+            $this->conferenceApplications->removeElement($conferenceApplication);
+            // set the owning side to null (unless already changed)
+            if ($conferenceApplication->getConference() === $this) {
+                $conferenceApplication->setConference(null);
+            }
+        }
 
         return $this;
     }

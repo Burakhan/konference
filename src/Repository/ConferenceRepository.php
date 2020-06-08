@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Conference;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -57,4 +58,10 @@ class ConferenceRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function listDashboard()
+    {
+        $query = $this->createQueryBuilder('c');
+        $query->join('c.institution', 'i', Join::WITH, 'i.id=c.institution' );
+        return $query;
+    }
 }

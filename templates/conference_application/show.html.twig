@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+
+<title>ConferenceApplication</title>
+
+{% block body %}
+    <h1>ConferenceApplication</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ conference_application.id }}</td>
+            </tr>
+            <tr>
+                <th>Summary</th>
+                <td>{{ conference_application.summary }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ conference_application.description }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ conference_application.status }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('conference_application_index') }}">back to list</a>
+
+    <a href="{{ path('conference_application_edit', {'id': conference_application.id}) }}">edit</a>
+
+    {{ include('conference_application/_delete_form.html.twig') }}
+{% endblock %}

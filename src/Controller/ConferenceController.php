@@ -9,6 +9,7 @@ use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\Paginator;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -43,6 +44,7 @@ class ConferenceController extends AbstractController
     public function new(Request $request): Response
     {
         $conference = new Conference();
+        $conference->setOwner($this->getUser());
         $form = $this->createForm(ConferenceType::class, $conference);
         $form->handleRequest($request);
 
@@ -50,6 +52,7 @@ class ConferenceController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($conference);
             $entityManager->flush();
+            $this->addFlash('success', 'Konferans kayıt edilmiştir.');
 
             return $this->redirectToRoute('conference_index');
         }
@@ -61,7 +64,7 @@ class ConferenceController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="conference_show", methods={"GET"})
+     * @Route("/detail/{id}", name="conference_show", methods={"GET"})
      */
     public function show(Conference $conference): Response
     {
@@ -80,6 +83,7 @@ class ConferenceController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
+            $this->addFlash('success', 'Konferans kayıt edilmiştir.');
 
             return $this->redirectToRoute('conference_index');
         }
@@ -93,14 +97,18 @@ class ConferenceController extends AbstractController
     /**
      * @Route("/{id}", name="conference_delete", methods={"DELETE"})
      */
-    public function delete(Request $request, Conference $conference): Response
+    public function delete(Request $request, Conference $conference): JsonResponse
     {
         if ($this->isCsrfTokenValid('delete'.$conference->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($conference);
             $entityManager->flush();
+            return new JsonResponse(['error' => false], Response::HTTP_OK);
+
+        } else {
+            return new JsonResponse(['error' => true], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
 
-        return $this->redirectToRoute('conference_index');
+
     }
 }

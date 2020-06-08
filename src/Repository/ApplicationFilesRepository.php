@@ -2,7 +2,8 @@
 
 namespace App\Repository;
 
-use App\Entity\Files;
+use App\Entity\ApplicationFiles;
+use App\Entity\ConferenceApplication;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -12,11 +13,11 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method File[]    findAll()
  * @method File[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class FileRepository extends ServiceEntityRepository
+class ApplicationFilesRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Files::class);
+        parent::__construct($registry, ApplicationFiles::class);
     }
 
     // /**
@@ -47,4 +48,12 @@ class FileRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function getFiles(ConferenceApplication $conferenceApplication)
+    {
+        return $this->createQueryBuilder('f')
+            ->andWhere('f.conferenceApplication = :val')
+            ->setParameter('val', $conferenceApplication)
+            ->getQuery()
+            ->getResult();
+    }
 }

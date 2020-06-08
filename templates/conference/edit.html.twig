@@ -1,13 +1,50 @@
-<!DOCTYPE html>
-
-<title>Edit Conference</title>
+{% extends 'public.base.html.twig' %}
+{% block title %} Konferanslarım {% endblock %}
 
 {% block body %}
-    <h1>Edit Conference</h1>
 
-    {{ include('conference/_form.html.twig', {'button_label': 'Update'}) }}
+    <div class="container-xl">
+        <!-- Page title -->
 
-    <a href="{{ path('conference_index') }}">back to list</a>
+        <div class="row">
+            <div class="col-3">
+                {% include '_common/sidebar.menu.html.twig' %}
+            </div>
+            <div class="col-9">
+                <div class="page-header">
+                    <div class="row">
+                        <div class="col-auto">
+                            <h2 class="page-title">
+                                Konferans Düzenle
+                            </h2>
+                        </div>
+                    </div>
+                </div>
+                {{ include('conference/_form.html.twig', {'button_label': 'Kaydet'}) }}
 
-    {{ include('conference/_delete_form.html.twig') }}
+            </div>
+        </div>
+    </div>
 {% endblock %}
+
+{% block javascripts %}
+<script>
+$(document).ready(function () {
+    $('.selectized').selectize({});
+
+    flatpickr(document.querySelector('.start_date'), {
+        dateFormat: "m/d/Y H:i",
+        enableTime: true,
+        time_24hr: true
+    });
+
+    flatpickr(document.querySelector('.end_date'), {
+        dateFormat: "m/d/Y H:i",
+        enableTime: true,
+        time_24hr: true
+    });
+});
+</script>
+{% endblock %}
+
+

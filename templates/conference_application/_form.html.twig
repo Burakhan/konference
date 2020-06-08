@@ -1,0 +1,22 @@
+{{ form_start(form) }}
+<div class="card card-lg">
+    <div class="card-body">
+        <div class="col-md-12">
+            <div class="mb-3">
+                Başvuru Özeti
+                {{ form_widget(form.summary, {'attr': {'class': 'form-control'}}) }}
+            </div>
+
+            <div class="mb-3">
+                Ek Başvuru Açıklaması
+                {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+    </div>
+    <div class="card-footer text-right">
+        <div class="d-flex">
+            <button type="submit" class="btn btn-primary ml-auto">{{ button_label|default('Kaydet ve Devam Et') }}</button>
+        </div>
+    </div>
+</div>
+{{ form_end(form) }}

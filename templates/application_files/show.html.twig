@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<title>ApplicationFiles</title>
+
+{% block body %}
+    <h1>ApplicationFiles</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ application_file.id }}</td>
+            </tr>
+            <tr>
+                <th>Size</th>
+                <td>{{ application_file.size }}</td>
+            </tr>
+            <tr>
+                <th>MimeType</th>
+                <td>{{ application_file.mimeType }}</td>
+            </tr>
+            <tr>
+                <th>OriginalName</th>
+                <td>{{ application_file.originalName }}</td>
+            </tr>
+            <tr>
+                <th>FileName</th>
+                <td>{{ application_file.fileName }}</td>
+            </tr>
+            <tr>
+                <th>CreatedAt</th>
+                <td>{{ application_file.createdAt ? application_file.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>UpdatedAt</th>
+                <td>{{ application_file.updatedAt ? application_file.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('application_files_index') }}">back to list</a>
+
+    <a href="{{ path('application_files_edit', {'id': application_file.id}) }}">edit</a>
+
+    {{ include('application_files/_delete_form.html.twig') }}
+{% endblock %}

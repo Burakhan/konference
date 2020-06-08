@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<title>ApplicationFiles index</title>
+
+{% block body %}
+    <h1>ApplicationFiles index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Size</th>
+                <th>MimeType</th>
+                <th>OriginalName</th>
+                <th>FileName</th>
+                <th>CreatedAt</th>
+                <th>UpdatedAt</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for application_file in application_files %}
+            <tr>
+                <td>{{ application_file.id }}</td>
+                <td>{{ application_file.size }}</td>
+                <td>{{ application_file.mimeType }}</td>
+                <td>{{ application_file.originalName }}</td>
+                <td>{{ application_file.fileName }}</td>
+                <td>{{ application_file.createdAt ? application_file.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ application_file.updatedAt ? application_file.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('application_files_show', {'id': application_file.id}) }}">show</a>
+                    <a href="{{ path('application_files_edit', {'id': application_file.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('application_files_new') }}">Create new</a>
+{% endblock %}

@@ -8,6 +8,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichFileType;
 
 class ConferenceInstitutionType extends AbstractType
 {
@@ -15,7 +16,12 @@ class ConferenceInstitutionType extends AbstractType
     {
         $builder
             ->add('title')
-            ->add('logo', CustomFileType::class)
+            ->add('file', VichFileType::class, [
+                'label' => false,
+                'allow_delete' => false, // not mandatory, default is true
+                'download_uri' => false, // not mandatory, default is true
+                'help' => "Image file less than 1MB",
+            ])
             ->add('domain')
         ;
     }

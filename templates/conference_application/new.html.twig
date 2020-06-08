@@ -1,6 +1,6 @@
 {% extends 'public.base.html.twig' %}
 
-{% block title %}{{conference.title}}{% endblock %}
+{% block title %} {{ conference.title }} - Başvuru{% endblock %}
 
 {% block body %}
     <div class="container-xl">
@@ -9,7 +9,7 @@
             <div class="row align-items-center">
                 <div class="col-auto">
                     <h2 class="page-title">
-                        {{conference.title}}
+                        Konferans Başvurusu
                     </h2>
                 </div>
             </div>
@@ -19,30 +19,25 @@
                 <div class="sticky-top">
                     <div class="card">
                         <div class="card-body text-center">
-                            <h2 class="mb-3">{{conference.institution.title}}</h2>
+                            <h2 class="mb-3">{{ conference.title }}</h2>
                             <p class="mb-4 text-muted">
-                                (Konferansı Düzenleyen Kurum)
+                                (Konferans)
                             </p>
-                            <a href="{{conference.institution.domain}}" class="btn btn-outline-primary btn-sm">
-                                Web
-                            </a>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-lg-9">
                 <div class="card card-lg">
+                    <div class="steps">
+                        <span href="#" class="step-item active" data-toggle="tooltip" title="Adım 1 - Başvuru Özeti">Adım 1 - Başvuru Özeti</span>
+                        <span href="#" class="step-item" data-toggle="tooltip" title="Adım 2 - Dosyalar">Adım 2 - Dosyalar</span>
+                        <span href="#" class="step-item" data-toggle="tooltip" title="Adım 3 - Katılımcılar">Adım 3 - Katılımcılar</span>
+                    </div>
                     <div class="card-body">
                         <div class="markdown">
-                            {{ conference.description }}
+                            {{ include('conference_application/_form.html.twig') }}
                         </div>
-                    </div>
-                </div>
-                <div class="alert alert-success alert-dismissible" role="alert">
-                    <h3>Başvuru</h3>
-                    <p>Konferansa katılmak için başvuru yapmanız gerekmektedir</p>
-                    <div class="btn-list">
-                        <a href="{{ path('conference_application_new', { 'conference': conference.id }) }}" class="btn btn-success">Konferans Bşavurusu</a>
                     </div>
                 </div>
             </div>

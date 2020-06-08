@@ -8,25 +8,19 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Vich\UploaderBundle\Form\Type\VichFileType;
 
-class CustomFileType extends AbstractType
+class ApplicationFilesType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('file', VichFileType::class, array(
-                'label' => false,
-                'allow_delete' => false, // not mandatory, default is true
-                'download_uri' => false, // not mandatory, default is true
-                'help' => "Image file less than 200KB",
-            ));
+            ->add('file',VichFileType::class, ['label' => false,])
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'data_class' => ApplicationFiles::class,
-            'label' => false,
-
         ]);
     }
 }

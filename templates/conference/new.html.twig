@@ -20,36 +20,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="card">
-                    <div class="card-body">
-                        <div class="col-md-12">
-                            <div class="mb-3">
-                                Konferansı Düzenleyen Kurum
-                                {{ form_widget(form.institution, {'attr': {'class': 'form-select selectized'}}) }}
-                            </div>
+                {{ include('conference/_form.html.twig', {'button_label': 'Kaydet'}) }}
 
-                            <div class="mb-3">
-                                Konferans Başlığı
-                                {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
-                            </div>
-
-                            <div class="mb-3">
-                                Konferans Açıklaması
-                                {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
-                            </div>
-
-                            <div class="mb-3">
-                                <label class="form-label">Konferans Şekli</label>
-                                <div>
-                                    {{ form_widget(form.conference_type, {'attr': {'class': ''}}) }}
-
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
             </div>
         </div>
     </div>
@@ -59,6 +31,18 @@
 <script>
 $(document).ready(function () {
     $('.selectized').selectize({});
+
+    flatpickr(document.querySelector('.start_date'), {
+        dateFormat: "m/d/Y H:i",
+        enableTime: true,
+        time_24hr: true
+    });
+
+    flatpickr(document.querySelector('.end_date'), {
+        dateFormat: "m/d/Y H:i",
+        enableTime: true,
+        time_24hr: true
+    });
 });
 </script>
 {% endblock %}

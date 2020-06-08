@@ -6,6 +6,8 @@ use App\Constants\ConferenceTypeConstants;
 use App\Entity\Conference;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -17,7 +19,7 @@ class ConferenceType extends AbstractType
         $builder
             ->add('title')
             ->add('description', TextAreaType::class)
-            ->add('conference_type', ChoiceType::class, [
+            ->add('conferenceType', ChoiceType::class, [
                 'choices' => [
                   'İnternet Üzerinden' => ConferenceTypeConstants::ONLINE,
                   'Yüz Yüze' => ConferenceTypeConstants::FACETOFACE,
@@ -27,8 +29,16 @@ class ConferenceType extends AbstractType
                 'expanded' => true,
                 'multiple' => false
             ])
-            ->add('start_date')
-        ->add('end_date')
+            ->add('startDate', DateTimeType::class, [
+                'widget' => 'single_text',
+                'format' => 'd/m/Y H:i',
+                'html5' => false
+            ])
+            ->add('endDate', DateTimeType::class, [
+                'widget' => 'single_text',
+                'format' => 'd/m/Y H:i',
+                'html5' => false
+            ])
         ->add('institution');
     }
 

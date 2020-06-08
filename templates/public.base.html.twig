@@ -24,8 +24,9 @@
     <link href="{{ asset('assets/libs/fullcalendar/timegrid/main.min.css') }}" rel="stylesheet"/>
     <link href="{{ asset('assets/libs/fullcalendar/list/main.min.css') }}" rel="stylesheet"/>
     <link href="{{ asset('assets/libs/flatpickr/dist/flatpickr.min.css') }}" rel="stylesheet"/>
-    <link href=".{{ asset('assets/libs/nouislider/distribute/nouislider.min.css') }}" rel="stylesheet"/>
-    <link href="https://api.mapbox.com/mapbox-gl-js/v1.8.0/mapbox-gl.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('assets/libs/nouislider/distribute/nouislider.min.css') }}" rel="stylesheet"/>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v1.8.0/mapbox-gl.css" rel="stylesheet"/>
+    <script src="https://kit.fontawesome.com/fd073f08c6.js" crossorigin="anonymous"></script>
     <!-- Tabler Core -->
     <link href="{{ asset('assets/css/tabler.min.css') }}" rel="stylesheet"/>
     <!-- Tabler Plugins -->
@@ -41,9 +42,59 @@
 </head>
 <body class="antialiased">
 <div class="page">
-   {{ include('_common/header.html.twig') }}
-   {{ include('_common/navbar.html.twig') }}
+    {{ include('_common/header.html.twig') }}
+    {{ include('_common/navbar.html.twig') }}
+
     <div class="content">
+
+        {% if app.session.flashBag.has('danger') or danger_message is defined %}
+            {% set messagesList =  app.session.flashBag.has('danger') ? app.session.flashBag.get('danger') : danger_message %}
+            {% for msg in messagesList %}
+                <div class="container-xl">
+                    <div class="alert alert-danger alert-dismissible" role="alert">
+                        {{ msg }}
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        {% if app.session.flashBag.has('info') or info_message is defined %}
+            {% set messagesList =  app.session.flashBag.has('info') ? app.session.flashBag.get('info') : info_message %}
+            {% for msg in messagesList %}
+                <div class="container-xl">
+                    <div class="alert alert-info alert-dismissible" role="alert">
+                        {{ msg }}
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        {% if app.session.flashBag.has('warning') or warning_message is defined %}
+            {% set messagesList =  app.session.flashBag.has('warning') ? app.session.flashBag.get('warning') : warning_message %}
+            {% for msg in messagesList %}
+                <div class="container-xl">
+                    <div class="alert alert-warning alert-dismissible" role="alert">
+                        {{ msg }}
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        {% if app.session.flashBag.has('success') or success_message is defined %}
+            {% set messagesList =  app.session.flashBag.has('success') ? app.session.flashBag.get('success') : success_message %}
+            {% for msg in messagesList %}
+                <div class="container-xl">
+                    <div class="alert alert-success alert-dismissible" role="alert">
+                        {{ msg }}
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+
         {% block body %}
         {% endblock body %}
         {{ include('_common/footer.html.twig') }}
@@ -51,6 +102,7 @@
 </div>
 <script src="{{ asset('assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
 <script src="{{ asset('assets/libs/jquery/dist/jquery.slim.min.js') }}"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="{{ asset('assets/libs/autosize/dist/autosize.min.js') }}"></script>
 <script src="{{ asset('assets/libs/imask/dist/imask.min.js') }}"></script>
 <script src="{{ asset('assets/libs/selectize/dist/js/standalone/selectize.min.js') }}"></script>
@@ -63,6 +115,7 @@
 <script src="{{ asset('assets/libs/jqvmap/dist/maps/jquery.vmap.usa.js') }}"></script>
 <script src="{{ asset('assets/libs/jqvmap/dist/maps/continents/jquery.vmap.europe.js') }}"></script>
 <script src="{{ asset('assets/libs/peity/jquery.peity.min.js') }}"></script>
+
 <!-- Tabler Core -->
 <script src="{{ asset('assets/js/tabler.min.js') }}"></script>
 <script>

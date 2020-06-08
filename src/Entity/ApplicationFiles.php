@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\File\File;
  * @Vich\Uploadable
  * @ORM\HasLifecycleCallbacks
  */
-class Files
+class ApplicationFiles
 {
     use TimestampableTrait;
 
@@ -26,9 +26,6 @@ class Files
     private $id;
 
     /**
-     * @Assert\Image(
-     *     maxSize="100000"
-     * )
      * @Vich\UploadableField(mapping="generic_file", fileNameProperty="fileName", originalName="originalName", mimeType="mimeType", size="size")
      */
     private $file;
@@ -59,7 +56,18 @@ class Files
      *
      * @var string
      */
-    private $fileName;
+    protected $fileName;
+
+    /**
+     * @var ConferenceApplication
+     * @ORM\ManyToOne(targetEntity="ConferenceApplication", inversedBy="file")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $conferenceApplication;
+
+    public function __construct(){
+        $this->updatedAt = new \DateTime();
+    }
 
     public function getId(): ?int
     {
@@ -76,6 +84,7 @@ class Files
 
     /**
      * @param File $file
+     * @throws \Exception
      */
     public function setFile(File $file): void
     {
@@ -83,7 +92,7 @@ class Files
         if ($file) {
             // It is required that at least one field changes if you are using doctrine
             // otherwise the event listeners won't be called and the file is lost
-            $this->updatedAt = new \DateTimeImmutable();
+            $this->updatedAt = new \DateTime();
         }
     }
 
@@ -138,7 +147,7 @@ class Files
     /**
      * @return string
      */
-    public function getFileName(): string
+    public function getFileName(): ?string
     {
         return $this->fileName;
     }
@@ -148,8 +157,26 @@ class Files
      */
     public function setFileName(string $fileName): void
     {
+        dump($this);
         $this->fileName = $fileName;
     }
+
+    /**
+     * @return ConferenceApplication
+     */
+    public function getConferenceApplication(): ConferenceApplication
+    {
+        return $this->conferenceApplication;
+    }
+
+    /**
+     * @param ConferenceApplication $conferenceApplication
+     */
+    public function setConferenceApplication(ConferenceApplication $conferenceApplication): void
+    {
+        $this->conferenceApplication = $conferenceApplication;
+    }
+
 
     public function __toString()
     {

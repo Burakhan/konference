@@ -48,9 +48,15 @@ class User implements UserInterface
      */
     private $conferences;
 
+    /**
+     * @ORM\OneToMany(targetEntity=ConferenceApplication::class, mappedBy="applicationUser")
+     */
+    private $conferenceApplications;
+
     public function __construct()
     {
         $this->conferences = new ArrayCollection();
+        $this->conferenceApplications = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -168,6 +174,37 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($conference->getOwner() === $this) {
                 $conference->setOwner(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ConferenceApplication[]
+     */
+    public function getConferenceApplications(): Collection
+    {
+        return $this->conferenceApplications;
+    }
+
+    public function addConferenceApplication(ConferenceApplication $conferenceApplication): self
+    {
+        if (!$this->conferenceApplications->contains($conferenceApplication)) {
+            $this->conferenceApplications[] = $conferenceApplication;
+            $conferenceApplication->setApplicationUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeConferenceApplication(ConferenceApplication $conferenceApplication): self
+    {
+        if ($this->conferenceApplications->contains($conferenceApplication)) {
+            $this->conferenceApplications->removeElement($conferenceApplication);
+            // set the owning side to null (unless already changed)
+            if ($conferenceApplication->getApplicationUser() === $this) {
+                $conferenceApplication->setApplicationUser(null);
             }
         }
 
